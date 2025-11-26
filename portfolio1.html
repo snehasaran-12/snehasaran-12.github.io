@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sneha S — Frontend Developer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
+
+  <style>
+    html { font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
+    
+    body {
+      transition: background 0.3s ease;
+      background: radial-gradient(circle at 20% 20%, #eef6ff 0%, #fbfbfe 35%, #f5f7fa 100%);
+    }
+    
+    body.dark {
+      background: radial-gradient(circle at 80% 20%, #111827 0%, #0b1220 60%, #03040a 100%);
+    }
+
+    .pattern-bg {
+      background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.7)),
+        url('https://www.transparenttextures.com/patterns/cubes.png');
+      transition: background 0.3s ease;
+    }
+    
+    body.dark .pattern-bg {
+      background: linear-gradient(180deg, rgba(8,10,20,0.6), rgba(8,10,20,0.7)),
+        url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+    }
+
+    .mesh-gradient {
+      background: radial-gradient(circle at 10% 20%, rgba(99,102,241,0.09) 0%, transparent 35%),
+        radial-gradient(circle at 80% 10%, rgba(236,72,153,0.06) 0%, transparent 40%),
+        radial-gradient(circle at 50% 90%, rgba(59,130,246,0.06) 0%, transparent 50%);
+    }
+    
+    body.dark .mesh-gradient {
+      background: radial-gradient(circle at 10% 20%, rgba(139,92,246,0.14) 0%, transparent 35%),
+        radial-gradient(circle at 80% 10%, rgba(244,63,94,0.08) 0%, transparent 40%),
+        radial-gradient(circle at 50% 90%, rgba(96,165,250,0.08) 0%, transparent 50%);
+    }
+
+    .glass {
+      background: rgba(255,255,255,0.66);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.6);
+    }
+    
+    body.dark .glass {
+      background: rgba(17,24,39,0.48);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg,#4f46e5,#06b6d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    body.dark .gradient-text {
+      background: linear-gradient(90deg,#93c5fd,#a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    @keyframes floatY {
+      0%,100% { transform: translateY(0) }
+      50% { transform: translateY(-14px) }
+    }
+    .floating { animation: floatY 3.2s ease-in-out infinite; }
+
+    .nav-link {
+      position: relative;
+    }
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      height: 2px;
+      width: 0%;
+      background: linear-gradient(90deg,#4f46e5,#06b6d4);
+      transition: width 220ms ease;
+    }
+    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+    .card-lift { 
+      transition: transform 220ms ease, box-shadow 220ms ease; 
+    }
+    .card-lift:hover { 
+      transform: translateY(-8px); 
+      box-shadow: 0 18px 40px rgba(15,23,42,0.08); 
+    }
+    body.dark .card-lift:hover { 
+      box-shadow: 0 18px 50px rgba(2,6,23,0.6); 
+    }
+   
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+
+     #about {
+  min-height: 100vh;    /* Full screen height */
+  display: flex;
+  align-items: center;  /* Vertically center content */
+}
+
+    .about-img {
+      width: 240px;
+      height: 240px;
+      object-fit: cover;
+      border-radius: 1rem;
+    }
+    @media (min-width: 768px) {
+      .about-img { width: 280px; height: 280px; }
+    }
+  </style>
+</head>
+<body class="text-gray-900 dark:text-gray-100">
+
+  <header class="fixed w-full top-0 z-50 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <h1 class="text-2xl font-bold">SNEHA <span class="gradient-text">S</span></h1>
+
+      <nav class="hidden md:flex items-center gap-6">
+        <a href="#home" class="nav-link text-sm font-medium text-gray-700 dark:text-gray-200 active">Home</a>
+        <a href="#about" class="nav-link text-sm font-medium text-gray-700 dark:text-gray-200">About</a>
+        <a href="#projects" class="nav-link text-sm font-medium text-gray-700 dark:text-gray-200">Projects</a>
+        <a href="#education" class="nav-link text-sm font-medium text-gray-700 dark:text-gray-200">Education</a>
+        <a href="#skills" class="nav-link text-sm font-medium text-gray-700 dark:text-gray-200">Skills</a>
+        <a href="#contact" class="nav-link text-sm font-medium text-gray-700 dark:text-gray-200">Contact</a>
+
+        <button onclick="toggleTheme()" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+          <i class="fas fa-moon text-gray-700 dark:hidden"></i>
+          <i class="fas fa-sun text-yellow-400 hidden dark:inline"></i>
+        </button>
+
+        <a href="https://github.com/snehasaran-12" target="_blank" class="text-xl text-gray-700 dark:text-gray-200 hover:text-blue-600">
+          <i class="fab fa-github"></i>
+        </a>
+      </nav>
+
+      <div class="md:hidden flex items-center gap-3">
+        <button onclick="toggleTheme()" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+          <i class="fas fa-moon text-gray-700 dark:hidden"></i>
+          <i class="fas fa-sun text-yellow-400 hidden dark:inline"></i>
+        </button>
+        <button onclick="toggleMobileMenu()" class="p-2 text-2xl text-gray-700 dark:text-gray-200">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+
+    <nav id="mobile-menu" class="hidden md:hidden bg-white dark:bg-slate-900 border-t border-gray-100 dark:border-slate-800">
+      <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-3">
+        <a href="#home" onclick="toggleMobileMenu()" class="text-gray-700 dark:text-gray-200">Home</a>
+        <a href="#about" onclick="toggleMobileMenu()" class="text-gray-700 dark:text-gray-200">About</a>
+        <a href="#projects" onclick="toggleMobileMenu()" class="text-gray-700 dark:text-gray-200">Projects</a>
+        <a href="#education" onclick="toggleMobileMenu()" class="text-gray-700 dark:text-gray-200">Education</a>
+        <a href="#skills" onclick="toggleMobileMenu()" class="text-gray-700 dark:text-gray-200">Skills</a>
+        <a href="#contact" onclick="toggleMobileMenu()" class="text-gray-700 dark:text-gray-200">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <section id="home" class="pt-24 md:pt-32 pb-16 min-h-screen flex items-center mesh-gradient">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="order-2 md:order-1">
+          <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-3 font-semibold">Hi, I'm</p>
+          <h1 class="text-5xl md:text-7xl font-extrabold mb-4 gradient-text">SNEHA</h1>
+          <p class="text-xl md:text-2xl font-semibold text-gray-700 dark:text-gray-300 mb-6">Frontend Web Developer</p>
+
+          <p class="text-base md:text-lg text-gray-600 dark:text-gray-400 mb-7 leading-relaxed max-w-3xl font-semibold">
+  <strong>Aspiring Frontend Developer</strong> with a strong foundation in
+  <strong>HTML, CSS, and JavaScript</strong>. Currently learning <strong>React</strong> to build modern,
+  interactive, and responsive websites.
+</p>
+
+
+          <div class="flex flex-wrap gap-4">
+            <a href="#projects" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-cyan-500 text-white rounded-full font-semibold shadow hover:scale-105 transform transition">
+              View My Work
+            </a>
+            <a href="SnehaCV.pdf" download class="inline-flex items-center px-6 py-3 border-2 border-indigo-600 dark:border-cyan-400 text-indigo-600 dark:text-cyan-400 rounded-full font-semibold hover:bg-indigo-600 hover:text-white dark:hover:bg-cyan-400 dark:hover:text-gray-900 transition">
+              Download CV
+            </a>
+          </div>
+        </div>
+
+        <div class="order-1 md:order-2 flex justify-center">
+          <div class="floating">
+            <div class="w-64 h-64 md:w-80 md:h-80 rounded-full p-1 bg-gradient-to-br from-purple-400 to-cyan-500">
+              <div class="w-full h-full rounded-full bg-white dark:bg-slate-800 p-2">
+                <img src="port.jpg" alt="Sneha" class="w-full h-full rounded-full object-cover">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<section id="about" class="py-12 md:py-16 pattern-bg min-h-screen flex items-center">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="grid md:grid-cols-2 gap-10 items-center">
+      <div class="flex justify-center">
+  <img src="Aboutme.jpg" alt="About" class="shadow-2xl about-img w-[450px]">
+</div>
+
+
+
+      <div>
+        <h2 class="text-4xl md:text-5xl font-bold mb-9 gradient-text">About Me</h2>
+
+        <div class="space-y-5 text-gray-700 dark:text-gray-300 font-semibold pl-5 text-lg">
+
+          <p>Hi, I'm Sneha! I'm a Frontend Developer passionate about building clean, responsive, and user-friendly websites. My core skills include <strong>HTML, CSS, JavaScript</strong>, and I'm learning <strong>React</strong>.</p>
+
+          <p>I focus on <strong>performance, accessibility and responsive design</strong>. I've built projects like a <strong>Calculator</strong>, <strong>Quiz App</strong>, <strong>Portfolio</strong>, and a basic <strong>E-Commerce</strong> site.</p>
+
+          <p>When I'm not coding, I explore UI/UX trends and improve my problem-solving skills.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="py-12 md:py-16 bg-gradient-to-b from-[#f5e9ff] to-[#f3dfff] scroll-mt-24">
+  <div class="max-w-5xl mx-auto px-4">
+
+    <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-8 text-[#7A1CAC]">
+      My Projects
+    </h2>
+
+    <!-- Horizontal Scroll -->
+    <div class="flex gap-6 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-4">
+
+      <!-- CARD -->
+      <div class="min-w-[260px] bg-white rounded-2xl shadow-md snap-center hover:-translate-y-1 transition-all duration-300">
+        <img src="ecommerce.png" class="w-full h-40 object-cover rounded-t-2xl">
+        <div class="p-4">
+          <h3 class="text-xl font-bold text-[#7A1CAC]">E-Commerce</h3>
+          <p class="text-gray-600 mt-1 text-sm">Shopping site with UI.</p>
+          <a href="https://github.com/snehasaran-12/E-Commerce" target="_blank"
+             class="text-indigo-600 font-semibold mt-2 inline-block text-sm">
+            View →
+          </a>
+        </div>
+      </div>
+
+      <!-- CARD -->
+      <div class="min-w-[260px] bg-white rounded-2xl shadow-md snap-center hover:-translate-y-1 transition-all duration-300">
+        <img src="Portfront.png" class="w-full h-40 object-cover rounded-t-2xl">
+        <div class="p-4">
+          <h3 class="text-xl font-bold text-[#7A1CAC]">Portfolio</h3>
+          <p class="text-gray-600 mt-1 text-sm">Portfolio with skills.</p>
+          <a href="https://github.com/snehasaran-12/Portfolio" target="_blank"
+             class="text-indigo-600 font-semibold mt-2 inline-block text-sm">
+            View →
+          </a>
+        </div>
+      </div>
+
+      <!-- CARD -->
+      <div class="min-w-[260px] bg-white rounded-2xl shadow-md snap-center hover:-translate-y-1 transition-all duration-300">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-KZSI7Ng7bAc7eEXi3u7vMWsmnc361R9cfA&s"
+             class="w-full h-40 object-cover rounded-t-2xl">
+        <div class="p-4">
+          <h3 class="text-xl font-bold text-[#7A1CAC]">Digital Clock</h3>
+          <p class="text-gray-600 mt-1 text-sm">Clock UI design.</p>
+          <a href="https://github.com/snehasaran-12/DigitalClock" target="_blank"
+             class="text-indigo-600 font-semibold mt-2 inline-block text-sm">
+            View →
+          </a>
+        </div>
+      </div>
+
+      <!-- CARD -->
+      <div class="min-w-[260px] bg-white rounded-2xl shadow-md snap-center hover:-translate-y-1 transition-all duration-300">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkHkPwK8b76-2LPBeEz8jshtx0RYC-i0fYVA&s"
+             class="w-full h-40 object-cover rounded-t-2xl">
+        <div class="p-4">
+          <h3 class="text-xl font-bold text-[#7A1CAC]">Quiz App</h3>
+          <p class="text-gray-600 mt-1 text-sm">Quiz scoring app.</p>
+          <a href="#" class="text-indigo-600 font-semibold mt-2 inline-block text-sm">
+            View →
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<section id="education" class="py-16 md:py-24">
+  <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-12 bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
+    Education
+  </h2>
+
+  <div class="overflow-x-auto pb-6">
+    <div class="flex items-center gap-20 px-6 min-w-max">
+
+
+      <!-- ==================== HS CLOUD ==================== -->
+      <div class="flex flex-col items-center gap-6">
+
+        <!-- CLOUD SHAPE -->
+        <div class="relative bg-purple-200 dark:bg-purple-300 px-10 py-6 rounded-[40px] shadow-lg">
+
+          <!-- Cloud bubbles -->
+          <span class="absolute -top-4 left-4 w-10 h-10 bg-purple-200 dark:bg-purple-300 rounded-full"></span>
+          <span class="absolute -top-2 right-4 w-8 h-8 bg-purple-200 dark:bg-purple-300 rounded-full"></span>
+          <span class="absolute -bottom-3 left-10 w-8 h-8 bg-purple-200 dark:bg-purple-300 rounded-full"></span>
+
+          <div class="text-5xl">🎓</div>
+        </div>
+
+        <!-- TEXT -->
+        <div class="bg-white dark:bg-slate-800 shadow-lg rounded-2xl p-6 w-70 text-center">
+          <h3 class="text-2xl font-bold text-purple-700 mb-2">Higher Secondary</h3>
+          <p class="text-gray-600 dark:text-gray-300 font-semibold">St. Mary’s Girls HSS,</p>
+          <p class="text-gray-600 dark:text-gray-300 font-semibold">Kotagiri</p>
+        </div>
+      </div>
+
+
+
+      <!-- LINE -->
+      <div class="h-1 w-24 bg-purple-500 rounded-full"></div>
+
+
+
+      <!-- ==================== BSC CLOUD ==================== -->
+      <div class="flex flex-col items-center gap-6">
+
+        <!-- CLOUD SHAPE -->
+        <div class="relative bg-blue-200 dark:bg-blue-300 px-10 py-6 rounded-[40px] shadow-lg">
+
+          <!-- Cloud bubbles -->
+          <span class="absolute -top-4 left-4 w-10 h-10 bg-blue-200 dark:bg-blue-300 rounded-full"></span>
+          <span class="absolute -top-2 right-4 w-8 h-8 bg-blue-200 dark:bg-blue-300 rounded-full"></span>
+          <span class="absolute -bottom-3 left-10 w-8 h-8 bg-blue-200 dark:bg-blue-300 rounded-full"></span>
+
+          <div class="text-5xl">📘</div>
+        </div>
+
+        <!-- TEXT -->
+        <div class="bg-white dark:bg-slate-800 shadow-lg rounded-2xl p-6 w-70 text-center">
+          <h3 class="text-2xl font-bold text-purple-700 mb-2">Bachelor of Science</h3>
+          <p class="text-gray-600 dark:text-gray-300 font-semibold">Dr.RV Arts & Science College,</p>
+          <p class="text-gray-600 dark:text-gray-300 font-semibold">Karamadai</p>
+        </div>
+      </div>
+
+
+
+      <!-- LINE -->
+      <div class="h-1 w-24 bg-purple-500 rounded-full"></div>
+
+
+
+      <!-- ==================== MSC CLOUD ==================== -->
+      <div class="flex flex-col items-center gap-6">
+
+        <!-- CLOUD SHAPE -->
+        <div class="relative bg-pink-200 dark:bg-pink-300 px-10 py-6 rounded-[40px] shadow-lg">
+
+          <!-- Cloud bubbles -->
+          <span class="absolute -top-4 left-4 w-10 h-10 bg-pink-200 dark:bg-pink-300 rounded-full"></span>
+          <span class="absolute -top-2 right-4 w-8 h-8 bg-pink-200 dark:bg-pink-300 rounded-full"></span>
+          <span class="absolute -bottom-3 left-10 w-8 h-8 bg-pink-200 dark:bg-pink-300 rounded-full"></span>
+
+          <div class="text-5xl">📗</div>
+        </div>
+
+        <!-- TEXT -->
+        <div class="bg-white dark:bg-slate-800 shadow-lg rounded-2xl p-6 w-70 text-center">
+          <h3 class="text-2xl font-bold text-purple-700 mb-2">Master of Science</h3>
+          <p class="text-gray-600 dark:text-gray-300 font-semibold">Dr.RV Arts & Science College,</p>
+          <p class="text-gray-600 dark:text-gray-300 font-semibold">Karamadai</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+<section id="skills" class="py-16 md:py-24 mesh-gradient">
+  <div class="max-w-6xl mx-auto px-4">
+
+    <!-- Heading -->
+    <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-6 gradient-text">
+      My Professional Skills
+    </h2>
+
+    <!-- Subtitle -->
+    <p class="text-center text-gray-600 dark:text-gray-400 mb-10 max-w-2xl mx-auto font-normal">
+      Technologies I use for modern web development.
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-8">
+
+      <!-- FRONTEND -->
+      <div class="card-lift glass rounded-xl p-6 shadow-lg">
+        <h3 class="text-2xl md:text-3xl font-extrabold mb-4 text-center text-[#995A8E]">
+          Front-end
+        </h3>
+
+        <div class="space-y-3">
+
+          <div class="flex items-center gap-4 bg-white dark:bg-slate-700 rounded-lg p-3">
+            <i class="fab fa-html5 text-2xl text-orange-500"></i>
+            <span class="font-normal text-lg font-semibold">HTML</span>
+          </div>
+
+          <div class="flex items-center gap-4 bg-white dark:bg-slate-700 rounded-lg p-3">
+            <i class="fab fa-css3-alt text-2xl text-blue-600"></i>
+            <span class="font-normal text-lg font-semibold">CSS</span>
+          </div>
+
+          <div class="flex items-center gap-4 bg-white dark:bg-slate-700 rounded-lg p-3">
+            <i class="fab fa-js text-2xl text-yellow-500"></i>
+            <span class="font-normal text-lg  font-semibold">JavaScript</span>
+          </div>
+
+          <div class="flex items-center gap-4 bg-white dark:bg-slate-700 rounded-lg p-3">
+            <i class="fab fa-react text-2xl text-cyan-500"></i>
+            <span class="font-normal text-lg font-semibold">React</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- BACKEND -->
+      <div class="card-lift glass rounded-xl p-6 shadow-lg">
+        <h3 class="text-2xl md:text-3xl font-extrabold mb-4 text-center text-[#995A8E]">
+          Back-end
+        </h3>
+
+        <div class="space-y-3">
+
+          <div class="flex items-center gap-4 bg-white dark:bg-slate-700 rounded-lg p-3">
+            <i class="fab fa-node-js text-2xl text-green-600"></i>
+            <span class="font-normal text-lg font-semibold">Node.js</span>
+          </div>
+
+          <div class="flex items-center gap-4 bg-white dark:bg-slate-700 rounded-lg p-3">
+            <i class="fas fa-cogs text-2xl text-slate-700 dark:text-gray-300"></i>
+            <span class="font-normal text-lg font-semibold">Express.js</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- DATABASE -->
+      <div class="card-lift glass rounded-xl p-6 shadow-lg">
+        <h3 class="text-2xl md:text-3xl font-extrabold mb-4 text-center text-[#995A8E]">
+          Database
+        </h3>
+
+        <div class="space-y-3">
+
+          <div class="flex items-center gap-4 bg-white dark:bg-slate-700 rounded-lg p-3">
+            <i class="fas fa-database text-2xl text-sky-700"></i>
+            <span class="font-normal text-lg font-semibold">MySQL</span>
+          </div>
+
+          <div class="flex items-center gap-4 bg-white dark:bg-slate-700 rounded-lg p-3">
+            <i class="fab fa-envira text-2xl text-green-600"></i>
+            <span class="font-normal text-lg font-semibold">MongoDB</span>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+  <section id="contact" class="py-16 md:py-24 pattern-bg">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-4xl md:text-5xl font-bold text-center mb-6 gradient-text">Contact Me</h2>
+      <p class="text-center text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+        I am open to new opportunities and collaborations. Feel free to reach out!
+      </p>
+
+      <div class="grid md:grid-cols-2 gap-10">
+        <form class="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-lg space-y-4">
+          <input type="text" placeholder="Your Name" required class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          <input type="email" placeholder="Your Email" required class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          <textarea rows="5" placeholder="Your Message" required class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+          <button type="submit" class="w-full px-4 py-3 bg-gradient-to-r from-indigo-600 to-cyan-500 text-white rounded-lg font-semibold hover:scale-105 transition">Send Message</button>
+        </form>
+
+        <div class="flex flex-col justify-center gap-6">
+          <h3 class="text-2xl font-semibold">Connect with me</h3>
+          <div class="grid grid-cols-2 gap-4">
+            <a href="https://www.instagram.com/sneha-saran-12" target="_blank" class="flex items-center gap-4 p-4 bg-gradient-to-br from-pink-500 to-purple-600 text-white rounded-xl hover:scale-105 transition">
+              <i class="fab fa-instagram text-2xl"></i><span class="font-semibold">Instagram</span>
+            </a>
+            <a href="https://www.linkedin.com/in/Richu-Sneha" target="_blank" class="flex items-center gap-4 p-4 bg-blue-600 text-white rounded-xl hover:scale-105 transition">
+              <i class="fab fa-linkedin text-2xl"></i><span class="font-semibold">LinkedIn</span>
+            </a>
+            <a href="tel:+917868917265" class="flex items-center gap-4 p-4 bg-green-600 text-white rounded-xl hover:scale-105 transition">
+              <i class="fas fa-phone text-2xl"></i><span class="font-semibold">Phone</span>
+            </a>
+            <a href="https://github.com/snehasaran-12" target="_blank" class="flex items-center gap-4 p-4 bg-slate-800 text-white rounded-xl hover:scale-105 transition">
+              <i class="fab fa-github text-2xl"></i><span class="font-semibold">GitHub</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-8 bg-white dark:bg-slate-900 border-t border-gray-100 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <p class="text-gray-600 dark:text-gray-400">© 2025 Sneha S | All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <script>
+    // Theme Toggle
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+    }
+
+    // Load theme on page load
+    if (localStorage.getItem('theme') === 'dark') {
+      document.body.classList.add('dark');
+      document.documentElement.classList.add('dark');
+    }
+
+    // Mobile menu toggle
+    function toggleMobileMenu() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    }
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+          if (window.innerWidth < 768) toggleMobileMenu();
+        }
+      });
+    });
+
+    // Active nav on scroll
+    window.addEventListener('scroll', () => {
+      let current = '';
+      document.querySelectorAll('section[id]').forEach(section => {
+        if (scrollY >= section.offsetTop - 180) current = section.id;
+      });
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+      });
+    });
+  </script>
+</body>
+</html>
